@@ -23,12 +23,20 @@ const charts: AppRouteModule = {
       component: () => import('/@/views/demo/charts/map/Baidu.vue'),
     },
     {
+      path: 'marsgis',
+      name: 'Marsgis',
+      meta: {
+        title: 'mars3d',
+      },
+      component: () => import('/@/marsgis/views/index.vue'),
+    },
+    {
       path: 'aMap',
       name: 'AMap',
       meta: {
         title: t('routes.demo.charts.aMap'),
       },
-      component: () => import('/@/views/demo/charts/map/Gaode.vue'),
+      component: () => import('/@/marsgis/views/demo/charts/map/Gaode.vue'),
     },
     {
       path: 'googleMap',

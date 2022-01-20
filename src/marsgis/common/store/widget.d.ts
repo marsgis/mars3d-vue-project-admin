@@ -3,7 +3,7 @@
  * @copyright 火星科技 mars3d.cn
  * @author 火星吴彦祖 2021-12-30
  */
-declare module "@mars/common/store/widget" {
+declare module "@mars/common/store/widget.js" {
   // 为 store state 声明类型
   export interface DefaultOption {
     autoDisable?: boolean
@@ -30,7 +30,7 @@ declare module "@mars/common/store/widget" {
     defaultOption?: DefaultOption // 支持配置默认参数
   }
 
-  export const key: InjectionKey<Store<WidgetState>> = Symbol("widget")
+  export const key: InjectionKey<Store<WidgetState>>
 
   export const injectState: (options: StoreOptions<WidgetState>) => Store<WidgetState>
 
