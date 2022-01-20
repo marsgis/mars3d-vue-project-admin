@@ -15,20 +15,20 @@ const charts: AppRouteModule = {
   },
   children: [
     {
+      path: 'marsgis',
+      name: 'Marsgis',
+      meta: {
+        title: '三维地图',
+      },
+      component: () => import('/@/marsgis/views/index.vue'),
+    },
+    {
       path: 'baiduMap',
       name: 'BaiduMap',
       meta: {
         title: t('routes.demo.charts.baiduMap'),
       },
       component: () => import('/@/views/demo/charts/map/Baidu.vue'),
-    },
-    {
-      path: 'marsgis',
-      name: 'Marsgis',
-      meta: {
-        title: 'mars3d',
-      },
-      component: () => import('/@/marsgis/views/index.vue'),
     },
     {
       path: 'aMap',
