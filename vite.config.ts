@@ -111,7 +111,6 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         'ant-design-vue/es/locale/en_US',
         '@mars/common/store/widget',
       ],
-      // exclude: ['./src/marsgis/common/store/widget.js'],
     },
   };
 };
