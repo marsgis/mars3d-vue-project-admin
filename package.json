@@ -51,7 +51,7 @@
     "localforage": "^1.10.0",
     "lodash-es": "^4.17.21",
     "mars3d": "^3.2.0",
-    "mars3d-cesium": "^1.89.0",
+    "mars3d-cesium": "^1.89.2",
     "mockjs": "^1.1.0",
     "nprogress": "^0.2.0",
     "path-to-regexp": "^6.2.0",

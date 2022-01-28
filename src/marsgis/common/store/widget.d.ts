@@ -1,9 +1,12 @@
+import { Store, StoreOptions } from "vuex"
+import { InjectionKey } from "vue"
+
 /**
  * store 状态管理
  * @copyright 火星科技 mars3d.cn
  * @author 火星吴彦祖 2021-12-30
  */
-declare module "@mars/common/store/widget.js" {
+declare module "@mars/common/store/widget" {
   // 为 store state 声明类型
   export interface DefaultOption {
     autoDisable?: boolean
@@ -46,7 +49,7 @@ declare module "@mars/common/store/widget.js" {
     // 获取widget的当前激活状态
     isActivate: (name: string) => void
     // 激活指定 widget模块
-    activate: (widget: string | Widget, reload = true) => void
+    activate: (widget: string | Widget, reload:boolean) => void
     // 释放指定的widget
     disable: (name: string) => void
     // 关闭释放所有widget ，hasAll传true值强制释放所有widget(默认autoDisable为false的widet不会释放)
