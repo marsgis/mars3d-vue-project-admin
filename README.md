@@ -53,7 +53,7 @@ git clone git@gitee.com:marsgis/mars3d-vue-project-admin.git
 ```
 ### 运行环境
 
-- 推荐使用 vscode，安装参考[开发环境搭建教程](guide/start/env.html)
+- 推荐使用 vscode，安装参考[开发环境搭建教程](http://mars3d.cn/dev/guide/start/env.html)
 - 安装 vscode 插件，推荐安装 volar（并禁用 vetur）、ESlint 、 Prettier
 - 配置 vscode 参数
 
