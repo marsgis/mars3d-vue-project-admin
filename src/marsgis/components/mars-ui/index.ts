@@ -61,7 +61,6 @@ import {
 
 import "./mars-echarts"
 
-import "./index.less"
 import "./function.less"
 
 export const $alert = marsAlert

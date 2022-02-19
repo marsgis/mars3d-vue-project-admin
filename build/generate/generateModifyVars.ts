@@ -20,7 +20,9 @@ export function generateModifyVars(dark = false) {
     ...modifyVars,
     // Used for global import to avoid the need to import each style file separately
     // reference:  Avoid repeated references
-    hack: `${modifyVars.hack} @import (reference) "${resolve('src/design/config.less')}";`,
+    hack: `${modifyVars.hack} @import (reference) "${resolve(
+      'src/design/config.less',
+    )}"; @import (reference) "${resolve('src/marsgis/components/mars-ui/base.less')}"`,
     'primary-color': primary,
     ...primaryColorObj,
     'info-color': primary,

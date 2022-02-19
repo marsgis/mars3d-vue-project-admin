@@ -215,4 +215,11 @@ const submitCenter = () => {
 .lnglat-input {
   width: 200px;
 }
+
+:deep(.ant-col) {
+  width: auto;
+  label {
+    color: #fff;
+  }
+}
 </style>
