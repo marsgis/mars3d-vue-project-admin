@@ -55,6 +55,7 @@ const getWidgetAttr = (widget: Widget) => {
   let attr = {}
   if (widget.meta && widget.meta.props) {
     attr = {
+      // ...widget.defaultOption.meta.props,
       ...attr,
       ...widget.meta.props
     }
@@ -72,10 +73,12 @@ const getWidgetAttr = (widget: Widget) => {
 <style lang="less" scoped>
 .mars-main-view {
   height: 100%;
+  width:100%;
   position: relative;
 }
 .centerDiv-container {
   height: 100%;
+  width:100%;
   overflow: hidden;
 }
 </style>

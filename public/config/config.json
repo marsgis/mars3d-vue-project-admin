@@ -46,7 +46,6 @@
       "timeline": false,
       "infoBox": false,
       "geocoder": false,
-      "geocoderConfig": { "key": ["ae29a37307840c7ae4a785ac905927e0"] },
       "selectionIndicator": false,
 
       "defaultContextMenu": true,
@@ -58,11 +57,11 @@
         "fps": false,
         "crs": "CGCS2000_GK_Zone_3",
         "crsDecimal": 0,
-        "template": "<div>经度:{lng}</div> <div>纬度:{lat}</div> <div>横{crsx}  纵{crsy}</div> <div>海拔：{alt}米</div> <div>层级：{level}</div><div>方向：{heading}°</div> <div>俯仰角：{pitch}°</div><div>视高：{cameraHeight}米</div>"
+        "template": "<div>经度:{lng}</div> <div>纬度:{lat}</div> <div class='hide1000'>横{crsx}  纵{crsy}</div> <div>海拔：{alt}米</div> <div class='hide700'>层级：{level}</div><div>方向：{heading}°</div> <div>俯仰角：{pitch}°</div><div class='hide700'>视高：{cameraHeight}米</div>"
       }
     },
     "terrain": {
-      "url": "{dataServer}/terrain",
+      "url": "//data.mars3d.cn/terrain",
       "show": true
     },
     "basemaps": [
@@ -167,6 +166,20 @@
       {
         "id": 2017,
         "pid": 10,
+        "name": "暗色底图",
+        "type": "gaode",
+        "icon": "img/basemaps/blackMarble.png",
+        "layer": "vec",
+        "invertColor": true,
+        "filterColor": "#4e70a6",
+        "brightness": 0.6,
+        "contrast": 1.8,
+        "gamma": 0.3,
+        "hue": 1,
+        "saturation": 0
+      },
+      {
+        "pid": 10,
         "name": "蓝色底图",
         "icon": "img/basemaps/bd-c-midnight.png",
         "type": "xyz",
@@ -253,6 +266,13 @@
         "minimumTerrainLevel": 4,
         "minimumLevel": 4,
         "proxy": "//server.mars3d.cn/proxy/",
+        "mapSplit": false
+      },
+      {
+        "pid": 50,
+        "name": "百度实时路况",
+        "type": "baidu",
+        "layer": "time",
         "mapSplit": false
       },
 
@@ -782,7 +802,8 @@
         "name": "汽车",
         "url": "{dataServer}/file/czml/car.czml",
         "center": { "lat": 40.894745, "lng": 121.920252, "alt": 904, "heading": 64, "pitch": -67 },
-         "radio": true,
+        "onWidget": "show-clock",
+        "radio": true,
         "flyTo": true
       },
       {
@@ -792,6 +813,7 @@
         "name": "飞行编队",
         "url": "{dataServer}/file/czml/flight.czml",
         "popup": "all",
+        "onWidget": "show-clock",
         "radio": true,
         "flyTo": true
       },
@@ -802,6 +824,7 @@
         "name": "船舶编队",
         "url": "{dataServer}/file/czml/ship.czml",
         "popup": "all",
+        "onWidget": "show-clock",
         "radio": true,
         "flyTo": true
       },

@@ -1,10 +1,10 @@
 import { Store, StoreOptions } from "vuex"
-import { InjectionKey } from "vue"
+import { InjectionKey, ComputedRef } from "vue"
 
 /**
  * store 状态管理
  * @copyright 火星科技 mars3d.cn
- * @author 火星吴彦祖 2021-12-30
+ * @author 火星吴彦祖 2022-2-19
  */
 declare module "@mars/common/store/widget" {
   // 为 store state 声明类型
@@ -39,20 +39,20 @@ declare module "@mars/common/store/widget" {
 
   export const useWidget: () => {
     // 本页面widget配置数组
-    widgets: () => Widget[]
+    widgets: ComputedRef<Widget[]>
     // 默认开启的widget
-    openAtStart: () => Widget[]
+    openAtStart: ComputedRef<string[]>
     // 获取指定的widget
     getWidget: (name: string) => any
     // 出发对应widget的onUpdate
     updateWidget: (name: string, ...args: any[]) => any
     // 获取widget的当前激活状态
-    isActivate: (name: string) => void
+    isActivate: (name: string) => boolean
     // 激活指定 widget模块
-    activate: (widget: string | Widget, reload:boolean) => void
+    activate: (widget: string | Widget, reload?:boolean) => void
     // 释放指定的widget
     disable: (name: string) => void
     // 关闭释放所有widget ，hasAll传true值强制释放所有widget(默认autoDisable为false的widet不会释放)
-    disableAll: (hasAll: boolean) => void
+    disableAll: (hasAll?: boolean) => void
   }
 }
