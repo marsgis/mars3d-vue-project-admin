@@ -1,10 +1,17 @@
+/**
+ * 文件处理相关 静态Util方法
+ *
+ * @copyright 火星科技 mars3d.cn
+ * @author 木遥 2022-01-01
+ */
+import { toKml } from "kml-geojson"
 
 /**
- * 读取json文件内容 
+ * 读取json文件内容
  *
  * @template T 返回的数据类型
  * @param {*} file 文件选择框选择的文件对象
- * @return {*}  {Promise<T>} 
+ * @return {*}  {Promise<T>}
  */
 export function readJSON<T>(file: any): Promise<T> {
   return new Promise((resolve) => {
@@ -25,6 +32,18 @@ export function readJSON<T>(file: any): Promise<T> {
   })
 }
 
+export function saveGeoJSON2Kml(geojson: string, options: any): any {
+  const geojsonObject = clone(geojson, null, null)
+
+  const kml = toKml(geojsonObject, {
+    name: "Mars3D标绘数据",
+    documentName: "Mars3D标绘数据文件",
+    documentDescription: "标绘数据 by mars3d.cn",
+    simplestyle: true,
+    ...options
+  })
+  return kml
+}
 
 function clone(obj: any, removeKeys: any, level: any): any {
   // 避免死循环，拷贝的层级最大深度
