@@ -7,7 +7,7 @@
  * @copyright 火星科技 mars3d.cn
  * @author 火星吴彦祖 2022-02-19
  */
-import { computed, onBeforeUnmount, onMounted } from "vue"
+import { computed, onMounted } from "vue"
 import * as mars3d from "mars3d"
 import { getQueryString, isPc } from "@mars/utils/mars-util"
 import { $alert, $message } from "@mars/components/mars-ui/index"
@@ -131,18 +131,9 @@ function onMapLoad() {
     }
   }
 }
-
-// 组件卸载之前销毁mars3d实例
-onBeforeUnmount(() => {
-  if (map) {
-    map.destroy()
-    map = null
-  }
-})
 </script>
 
 <style lang="less">
-
 /**cesium 工具按钮栏*/
 .cesium-viewer-toolbar {
   top: auto;
