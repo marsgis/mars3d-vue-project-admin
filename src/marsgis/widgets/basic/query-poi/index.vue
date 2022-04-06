@@ -5,16 +5,18 @@
         class="search-input"
         ref="complete"
         v-model:value="searchTxt"
-        size="large"
         :options="dataSource"
+        size="large"
+        :dropdown-style="{ 'background-color': 'rgba(63, 72, 84, 0.7' }"
         @search="handleSearch"
         @select="selectPoint"
         @focus="handleSearch(searchTxt)"
+        @blur="blurSearch"
       >
         <a-input-search size="large" placeholder="搜索 地点" @search="searchPoint">
           <template #enterButton>
             <a-button>
-              <mars-icon icon="icon-park-outline:search" width="20" color="#fff"></mars-icon>
+              <mars-icon icon="search" width="20" color="#fff"></mars-icon>
             </a-button>
           </template>
         </a-input-search>
@@ -85,6 +87,14 @@ const handleSearch = (val: string) => {
     })
     dataSource.value = list
   })
+}
+const blurSearch = () => {
+  const text = searchTxt.value
+
+  if (!text) {
+    mapWork.clearLayers()
+    siteListShow.value = false
+  }
 }
 
 // 展示搜寻过的历史数据

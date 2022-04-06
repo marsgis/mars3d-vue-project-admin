@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { onUnmounted, ref, markRaw } from "vue"
+import { ref, markRaw, onMounted } from "vue"
 import useLifecycle from "@mars/common/uses/use-lifecycle"
 import * as mapWork from "./map"
 
@@ -22,15 +22,12 @@ import * as mapWork from "./map"
 useLifecycle(mapWork)
 
 const baseMaps = ref<any[]>([])
-
 const active = ref("")
-
 const chkHasTerrain = ref(false)
 
-mapWork.eventTarget.on("mapLoaded", initData)
-
-onUnmounted(() => {
-  mapWork.eventTarget.off("mapLoaded", initData)
+onMounted(() => {
+  const layers = mapWork.getLayers()
+  initData(layers)
 })
 
 function initData(e: any) {
@@ -75,9 +72,10 @@ function changeTerrain() {
     .active-card();
   }
   .icon {
-    border: 2px solid #fff;
+    border: 1px solid #4db3ff78;
     width: 75px;
     height: 70px;
+    padding: 1px;
   }
 }
 

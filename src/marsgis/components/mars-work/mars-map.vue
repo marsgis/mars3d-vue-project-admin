@@ -7,7 +7,7 @@
  * @copyright 火星科技 mars3d.cn
  * @author 火星吴彦祖 2022-02-19
  */
-import { computed, onMounted } from "vue"
+import { computed, onBeforeUnmount, onMounted } from "vue"
 import * as mars3d from "mars3d"
 import { getQueryString, isPc } from "@mars/utils/mars-util"
 import { $alert, $message } from "@mars/components/mars-ui/index"
@@ -71,7 +71,8 @@ const initMars3d = (option: any) => {
     }
   } else {
     map.zoomFactor = 5.0 // 鼠标滚轮放大的步长参数
-    map.scene.screenSpaceCameraController.enableTilt = false
+
+    // map.scene.screenSpaceCameraController.enableTilt = false
 
     // 移动设备上禁掉以下几个选项，可以相对更加流畅
     map.scene.requestRenderMode = true // 取消实时渲染
@@ -131,15 +132,24 @@ function onMapLoad() {
     }
   }
 }
+
+// 组件卸载之前销毁mars3d实例
+onBeforeUnmount(() => {
+  if (map) {
+    map.destroy()
+    map = null
+  }
+})
 </script>
 
 <style lang="less">
+
 /**cesium 工具按钮栏*/
 .cesium-viewer-toolbar {
-  top: auto;
-  bottom: 35px;
-  left: 12px;
-  right: auto;
+  top: auto !important;
+  bottom: 35px !important;
+  left: 12px !important;
+  right: auto !important;
 }
 .cesium-toolbar-button img {
   height: 100%;
