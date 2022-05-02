@@ -25,7 +25,7 @@ import { useWidget } from "@mars/common/store/widget"
 const { currentWidget } = useWidget()
 
 currentWidget.onUpdate((e) => {
-  console.log(e)
+  // console.log(e)
 })
 
 useLifecycle(mapWork)
@@ -33,9 +33,7 @@ useLifecycle(mapWork)
 const extent = ref("")
 
 const onClickDrawExtent = async () => {
-  console.log(extent.value)
   const data = await mapWork.drawExtent()
-
   extent.value = data.extent
 }
 </script>

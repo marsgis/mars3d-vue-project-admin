@@ -9,6 +9,7 @@ import MarsButton from "./mars-button/index.vue"
 import MarsInput from "./mars-input/index.vue"
 import MarsTextarea from "./mars-textarea/index.vue"
 import MarsInputNumber from "./mars-input-number/index.vue"
+import MarsInputGroup from "./mars-input-group/index.vue"
 import MarsDatePicker from "./mars-date-picker/index.vue"
 import MarsRangePicker from "./mars-range-picker/index.vue"
 import MarsColorPicker from "./mars-color-picker"
@@ -18,6 +19,7 @@ import MarsDialog from "./mars-dialog/index.vue"
 import MarsSlider from "./mars-slider/index.vue"
 import MarsPannel from "./mars-pannel/index.vue"
 import MarsDropDown from "./mars-dropdown"
+import MarsGui from "./mars-gui/index.vue"
 import MarsMessage, { $message as marsMessage } from "./mars-message"
 import MarsAlert, { $alert as marsAlert } from "./mars-alert/"
 import MarsNotify, { $notify as marsNotify } from "./mars-notify"
@@ -74,6 +76,7 @@ const components = [
   MarsSelect,
   MarsButton,
   MarsInput,
+  MarsInputGroup,
   MarsInputNumber,
   MarsDatePicker,
   MarsRangePicker,
@@ -85,7 +88,8 @@ const components = [
   MarsPannel,
   MarsTextarea,
   MarsSwitch,
-  MarsSlider
+  MarsSlider,
+  MarsGui
 ]
 
 let marsUIConfig: Record<string, any>
