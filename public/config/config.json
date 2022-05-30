@@ -44,7 +44,7 @@
       "geocoder": false,
       "selectionIndicator": false,
 
-      "defaultContextMenu": true,
+      "contextmenu": { "hasDefault": true },
       "mouseDownView": true,
       "zoom": { "insertIndex": 1 },
       "compass": { "bottom": "toolbar", "left": "5px" },
@@ -125,7 +125,7 @@
       {
         "pid": 10,
         "name": "腾讯影像",
-        "icon": "img/basemaps/gaode_img.png",
+        "icon": "img/basemaps/tencent_img.png",
         "type": "group",
         "layers": [
           { "name": "底图", "type": "tencent", "layer": "img_d" },
@@ -1056,6 +1056,18 @@
         "skipLevelOfDetail": true,
         "preferLeaves": true,
         "center": { "lat": 31.795308, "lng": 117.21948, "alt": 1820, "heading": 0, "pitch": -39 }
+      },
+      {
+        "pid": 2030,
+        "type": "3dtiles",
+        "name": "大雁塔",
+        "url": "{dataServer}/3dtiles/qx-dyt/tileset.json",
+        "position": { "alt": -27 },
+        "maximumScreenSpaceError": 1,
+        "maximumMemoryUsage": 1024,
+        "center": { "lat": 34.215516, "lng": 108.960251, "alt": 834, "heading": 4, "pitch": -48 },
+        "flyTo": false,
+        "show": false
       },
       {
         "id": 203013,
