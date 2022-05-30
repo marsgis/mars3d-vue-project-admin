@@ -72,7 +72,6 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       outDir: OUTPUT_DIR,
       // minify: 'terser',
       /**
-       * �� minify=��minify:'terser'加密
        * Uncomment when minify="minify:'terser'"
        */
       // terserOptions: {
@@ -82,10 +81,10 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       //   },
       // },
       // Turning off brotliSize display can slightly reduce packaging time
-      
+
       // 自定义rollup-commonjs插件选项
       commonjsOptions: {
-        include: /node_modules|src\/marsgis\/common\/store/
+        include: /node_modules|src\/marsgis\/common\/store/,
       },
       brotliSize: false,
       chunkSizeWarningLimit: 2000,
