@@ -19,7 +19,7 @@ export const tags: string[] = [
   '前端开发',
   'vue3',
 ];
-<span class="iconify" data-icon="jam:codepen-circle" data-inline="false"></span>;
+
 export const teams: ListItem[] = [
   {
     icon: 'ri:alipay-fill',
@@ -96,7 +96,7 @@ export const articleList = (() => {
   const result: any[] = [];
   for (let i = 0; i < 4; i++) {
     result.push({
-      title: 'Mars3D Admin',
+      title: 'Vben Admin',
       description: ['Vben', '设计语言', 'Typescript'],
       content: '基于Vue Next, TypeScript, Ant Design实现的一套完整的企业级后台管理系统。',
       time: '2020-11-14 11:20',
@@ -109,7 +109,7 @@ export const applicationList = (() => {
   const result: any[] = [];
   for (let i = 0; i < 8; i++) {
     result.push({
-      title: 'Mars3D Admin',
+      title: 'Vben Admin',
       icon: 'emojione-monotone:letter-a',
       color: '#1890ff',
       active: '100',
@@ -124,7 +124,7 @@ export const projectList = (() => {
   const result: any[] = [];
   for (let i = 0; i < 8; i++) {
     result.push({
-      title: 'Mars3D Admin',
+      title: 'Vben Admin',
       content: '基于Vue Next, TypeScript, Ant Design实现的一套完整的企业级后台管理系统。',
     });
   }

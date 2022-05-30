@@ -5,7 +5,7 @@ export const searchList = (() => {
   for (let i = 0; i < 6; i++) {
     result.push({
       id: i,
-      title: 'Mars3D Admin',
+      title: 'Vben Admin',
       description: ['Vben', '设计语言', 'Typescript'],
       content: '基于Vue Next, TypeScript, Ant Design实现的一套完整的企业级后台管理系统。',
       time: '2020-11-14 11:20',

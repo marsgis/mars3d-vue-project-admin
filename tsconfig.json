@@ -26,9 +26,7 @@
     "paths": {
       "/@/*": ["src/*"],
       "/#/*": ["types/*"],
-      "@mars/*": [
-        "src/marsgis/*"
-      ]
+      "@mars/*": ["src/marsgis/*"]
     }
   },
   "include": [
