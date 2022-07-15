@@ -1,6 +1,6 @@
 {
   "name": "mars3d-vue-project-admin",
-  "version": "3.3.0",
+  "version": "3.4.0",
   "scripts": {
     "bootstrap": "pnpm install",
     "serve": "npm run dev",
@@ -69,7 +69,7 @@
     "kml-geojson": "^1.2.0",
     "localforage": "^1.10.0",
     "mapv": "^2.0.62",
-    "mars3d": "^3.3.10",
+    "mars3d": "^3.4.0",
     "uuid": "^8.3.2",
     "vue-color-kit": "^1.0.5",
     "vuex": "^4.0.2"
