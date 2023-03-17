@@ -16,7 +16,7 @@
 /**
  * pannel面板
  * @copyright 火星科技 mars3d.cn
- * @author 火星吴彦祖 2022-02-19
+ * @author 木遥 2022-02-19
  */
 import { onMounted, ref, computed } from "vue"
 import { getConfig } from "../index"
