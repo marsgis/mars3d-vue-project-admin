@@ -15,7 +15,7 @@ import { configVisualizerConfig } from './visualizer';
 import { configThemePlugin } from './theme';
 import { configImageminPlugin } from './imagemin';
 import { configSvgIconsPlugin } from './svgSprite';
-import { vitePluginMars3d } from 'vite-plugin-mars3d';
+import { mars3dPlugin } from 'vite-plugin-mars3d';
 
 export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
   const {
@@ -34,7 +34,7 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
     // support name
     vueSetupExtend(),
     // mars3d
-    vitePluginMars3d(),
+    mars3dPlugin(),
     VitePluginCertificate({
       source: 'coding',
     }),
