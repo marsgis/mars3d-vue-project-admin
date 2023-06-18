@@ -16,6 +16,7 @@ import { configThemePlugin } from './theme';
 import { configImageminPlugin } from './imagemin';
 import { configSvgIconsPlugin } from './svgSprite';
 import { mars3dPlugin } from 'vite-plugin-mars3d';
+import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
 
 export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
   const {
@@ -35,6 +36,7 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
     vueSetupExtend(),
     // mars3d
     mars3dPlugin(),
+    viteCommonjs(),
     VitePluginCertificate({
       source: 'coding',
     }),
