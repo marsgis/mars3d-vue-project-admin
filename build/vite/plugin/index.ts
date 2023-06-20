@@ -15,7 +15,7 @@ import { configVisualizerConfig } from './visualizer';
 import { configThemePlugin } from './theme';
 import { configImageminPlugin } from './imagemin';
 import { configSvgIconsPlugin } from './svgSprite';
-import { mars3dPlugin } from 'vite-plugin-mars3d';
+import { vitePluginMars3d as mars3dPlugin } from 'vite-plugin-mars3d';
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
 
 export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
@@ -72,7 +72,7 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
   // The following plugins only work in the production environment
   if (isBuild) {
     // vite-plugin-imagemin
-    VITE_USE_IMAGEMIN && vitePlugins.push(configImageminPlugin());
+    // VITE_USE_IMAGEMIN && vitePlugins.push(configImageminPlugin());
 
     // rollup-plugin-gzip
     vitePlugins.push(
