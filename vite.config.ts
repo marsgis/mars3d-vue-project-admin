@@ -1,126 +1,67 @@
-import type { UserConfig, ConfigEnv } from 'vite';
-import pkg from './package.json';
-import dayjs from 'dayjs';
-import { loadEnv } from 'vite';
-import { resolve } from 'path';
-import { generateModifyVars } from './build/generate/generateModifyVars';
-import { createProxy } from './build/vite/proxy';
-import { wrapperEnv } from './build/utils';
-import { createVitePlugins } from './build/vite/plugin';
-import { OUTPUT_DIR } from './build/constant';
+import { defineApplicationConfig } from '@vben/vite-config';
+import path, { resolve } from 'path';
+import { mars3dPlugin } from 'vite-plugin-mars3d';
 
-function pathResolve(dir: string) {
-  return resolve(process.cwd(), '.', dir);
-}
-
-const { dependencies, devDependencies, name, version } = pkg;
-const __APP_INFO__ = {
-  pkg: { dependencies, devDependencies, name, version },
-  lastBuildTime: dayjs().format('YYYY-MM-DD HH:mm:ss'),
-};
-
-export default ({ command, mode }: ConfigEnv): UserConfig => {
-  const root = process.cwd();
-
-  const env = loadEnv(mode, root);
-
-  // The boolean type read by loadEnv is a string. This function can be converted to boolean type
-  const viteEnv = wrapperEnv(env);
-
-  const { VITE_PORT, VITE_PUBLIC_PATH, VITE_PROXY, VITE_DROP_CONSOLE } = viteEnv;
-
-  const isBuild = command === 'build';
-
-  return {
-    base: VITE_PUBLIC_PATH,
-    root,
-    resolve: {
-      alias: [
-        {
-          find: 'vue-i18n',
-          replacement: 'vue-i18n/dist/vue-i18n.cjs.js',
-        },
-        // /@/xxxx => src/xxxx
-        {
-          find: /\/@\//,
-          replacement: pathResolve('src') + '/',
-        },
-        // /#/xxxx => types/xxxx
-        {
-          find: /\/#\//,
-          replacement: pathResolve('types') + '/',
-        },
-        {
-          find: /@mars\//,
-          replacement: pathResolve('src/marsgis') + '/',
-        },
-      ],
-    },
-    server: {
-      // Listening on all local IPs
-      host: true,
-      port: VITE_PORT,
-      // Load proxy configuration from .env
-      proxy: createProxy(VITE_PROXY),
-    },
-    esbuild: {
-      pure: VITE_DROP_CONSOLE ? ['console.log', 'debugger'] : [],
-    },
-    build: {
-      target: 'es2015',
-      cssTarget: 'chrome80',
-      outDir: OUTPUT_DIR,
-      // minify: 'terser',
-      /**
-       * Uncomment when minify="minify:'terser'"
-       */
-      // terserOptions: {
-      //   compress: {
-      //     keep_infinity: true,
-      //     drop_console: VITE_DROP_CONSOLE,
-      //   },
-      // },
-      // Turning off brotliSize display can slightly reduce packaging time
-
-      // 自定义rollup-commonjs插件选项
-      commonjsOptions: {
-        include: /node_modules|src\/marsgis\/common\/store/,
-      },
-      brotliSize: false,
-      chunkSizeWarningLimit: 2000,
-    },
-    define: {
-      // setting vue-i18-next
-      // Suppress warning
-      __INTLIFY_PROD_DEVTOOLS__: false,
-      __APP_INFO__: JSON.stringify(__APP_INFO__),
-      'process.env': {
-        BASE_URL: '/',
-      },
-    },
-
-    css: {
-      preprocessorOptions: {
-        less: {
-          modifyVars: generateModifyVars(),
-          javascriptEnabled: true,
-        },
-      },
-    },
-
-    // The vite plugin used by the project. The quantity is large, so it is separately extracted and managed
-    plugins: createVitePlugins(viteEnv, isBuild),
-
+export default defineApplicationConfig({
+  overrides: {
     optimizeDeps: {
-      // @iconify/iconify: The dependency is dynamically and virtually loaded by @purge-icons/generated, so it needs to be specified explicitly
       include: [
-        '@vue/runtime-core',
-        '@vue/shared',
+        'echarts/core',
+        'echarts/charts',
+        'echarts/components',
+        'echarts/renderers',
+        'qrcode',
         '@iconify/iconify',
         'ant-design-vue/es/locale/zh_CN',
         'ant-design-vue/es/locale/en_US',
         '@mars/common/store/widget',
       ],
     },
-  };
-};
+    resolve: {
+      alias: [
+        {
+          find: /@mars\//,
+          replacement: pathResolve('src/marsgis') + '/',
+        },
+      ],
+    },
+    define: {
+      'process.env': {
+        BASE_URL: '/',
+      },
+    },
+    server: {
+      proxy: {
+        '/basic-api': {
+          target: 'http://localhost:3000',
+          changeOrigin: true,
+          ws: true,
+          rewrite: (path) => path.replace(new RegExp(`^/basic-api`), ''),
+          // only https
+          // secure: false
+        },
+        '/upload': {
+          target: 'http://localhost:3300/upload',
+          changeOrigin: true,
+          ws: true,
+          rewrite: (path) => path.replace(new RegExp(`^/upload`), ''),
+        },
+      },
+    },
+    css: {
+      preprocessorOptions: {
+        less: {
+          javascriptEnabled: true,
+          additionalData: `
+          @import "${path.resolve(__dirname, 'src/marsgis/components/mars-ui/base.less')}";
+          `,
+        },
+      },
+    },
+    plugins: [mars3dPlugin()],
+  },
+});
+
+function pathResolve(dir: string) {
+  return resolve(process.cwd(), '.', dir);
+}

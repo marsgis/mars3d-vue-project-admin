@@ -2,19 +2,41 @@
  * 所有页面全局公共CSS
  *
  * @copyright 火星科技 mars3d.cn
- * @author 木遥 2022-01-01
+ * @author 火星渣渣灰 2022-01-01
  */
 
 /* 清除内外边距 */
-body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, /* structural elements 结构元素 */
- dl, dt, dd, ul, ol, li, /* list elements 列表元素 */
- pre, /* text formatting elements 文本格式元素 */
- fieldset, lengend, button, input, textarea, /* form elements 表单元素 */
- th, td {
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+p,
+blockquote,
+/* structural elements 结构元素 */
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+/* list elements 列表元素 */
+pre,
+/* text formatting elements 文本格式元素 */
+fieldset,
+lengend,
+button,
+input,
+textarea,
+/* form elements 表单元素 */
+th,
+td {
   /* table elements 表格元素 */
   margin: 0;
   padding: 0;
-  color: #fff;
   -moz-user-select: none; /*火狐*/
   -webkit-user-select: none; /*webkit浏览器*/
   -ms-user-select: none; /*IE10*/
@@ -30,11 +52,12 @@ body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, /* structural elements 结构�
 
 body,
 html {
-  background-color: @mars-bg-base;
-  color: @mars-base-color;
+  background-color: var(--mars-bg-base) !important;
+  color: var(--mars-base-color) !important;
   font-size: 14px;
-  min-width: 900px;
+  // min-width: 900px;
   overflow: hidden;
+
   * {
     scrollbar-base-color: #f4f7fc;
     scrollbar-track-color: #f4f7fc;
@@ -49,28 +72,16 @@ html {
   }
 }
 
-.base-overlay {
-  .ant-dropdown-menu {
-    background-color: rgba(63, 72, 84, 0.7) !important;
-    .mars-icon {
-      vertical-align: middle;
-      margin-right: 4px;
-    }
-  }
-}
-
-.icon-vertical-a {
-  width: 20px;
-  height: 20px;
-  vertical-align: -0.3em !important;
-}
-
 .mars-primary-table {
   width: 100%;
+  border-color: var(--mars-base-border-color);
+
   tr td:nth-of-type(1) {
     width: 100px;
   }
+
   td {
     padding: 5px;
+    color: var(--mars-text-color);
   }
 }

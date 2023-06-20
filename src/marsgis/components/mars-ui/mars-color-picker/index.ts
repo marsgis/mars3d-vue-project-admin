@@ -16,7 +16,11 @@ const MarsColorPicker = defineComponent({
   props: {
     value: {
       type: String,
-      default: "#FFFFFF"
+      default: "rgba(255,255,255,1)"
+    },
+    hiddenAlpha: {
+      type: Boolean,
+      default: false
     }
   },
   emits: ["update:value", "change"],
@@ -25,8 +29,11 @@ const MarsColorPicker = defineComponent({
     const visible = ref(false)
     let colorObject: any = null
 
+    console.log("传递过来的", props.hiddenAlpha)
+
+
     const changeColor = (color: any) => {
-      pointColor = color.hex
+      pointColor = `rgba(${color.rgba.r},${color.rgba.g},${color.rgba.b},${color.rgba.a})`// color.hex
       colorObject = color
     }
     const cancel = () => {
@@ -56,7 +63,10 @@ const MarsColorPicker = defineComponent({
       )
     ]
 
-    const content = [h(ColorPicker, { suckerHide: false, color: pointColor, onChangeColor: changeColor } as any /* TODO 强制给any类型 */), h("div", { class: "f-tac" }, Buttons)]
+    const content = [
+      h(ColorPicker, { suckerHide: true, color: pointColor, onChangeColor: changeColor } as any /* TODO 强制给any类型 */),
+      h("div", { class: "f-tac" }, Buttons)
+    ]
 
     return () =>
       h(
@@ -64,6 +74,8 @@ const MarsColorPicker = defineComponent({
         {
           trigger: "click",
           placement: "right",
+          overlayClassName: props.hiddenAlpha ? "overlayClassName" : "", // 打开的面板样式,隐藏透明度面板
+          // overlayClassName: "overlayClassName", // 打开的面板样式,隐藏透明度面板
           visible: visible.value,
           "onUpdate:visible": (v: boolean) => {
             visible.value = v

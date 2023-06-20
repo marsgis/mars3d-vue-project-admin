@@ -6,7 +6,7 @@ import "./tree.less"
 /**
  * 树控件
  * @copyright 火星科技 mars3d.cn
- * @author 木遥 2022-01-01
+ * @author 火星渣渣灰 2022-01-01
  */
 const MarsTree = defineComponent({
   name: "mars-tree",
@@ -16,11 +16,10 @@ const MarsTree = defineComponent({
       if (isLeaf && !group) {
         return [
           h(Icon, {
-            icon: "split",
+            icon: "notes",
             width: "14",
             color: "#79C1F8",
-            theme: "multi-color",
-            fill: ["#FFF", "#43CCF8", "#43CCF8", "#43CCF8"],
+            theme: "outline",
             key: new Date().getTime()
           })
         ]

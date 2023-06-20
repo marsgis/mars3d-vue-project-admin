@@ -1,10 +1,8 @@
 node_modules
 .DS_Store
 dist
-dist.zip
-dist.rar
-.npmrc
 .cache
+.turbo
 
 tests/server/static
 tests/server/static/upload
@@ -30,6 +28,13 @@ pnpm-debug.log*
 *.sln
 *.sw?
 
-yarn.lock
 package-lock.json
-.vscode/
+pnpm-lock.yaml
+
+.history
+
+/node_modules
+public/lib/CesiumUnminified/
+packages/mars3d/dist/plugins/
+packages/mars3d/node_modules/
+mars3d-*src.*

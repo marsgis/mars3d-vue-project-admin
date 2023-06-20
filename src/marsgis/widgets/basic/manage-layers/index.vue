@@ -1,11 +1,11 @@
 <template>
-  <mars-dialog title="图层" width="280" :min-width="250" top="60" bottom="40" right="10">
+  <mars-dialog :draggable="true" title="图层" width="300" :min-width="250" top="60" right="10">
     <mars-tree checkable :tree-data="treeData" v-model:expandedKeys="expandedKeys" v-model:checkedKeys="checkedKeys" @check="checkedChange">
       <template #title="node">
         <mars-dropdown-menu :trigger="['contextmenu']">
           <span @dblclick="flyTo(node)">{{ node.title }}</span>
           <template #overlay v-if="node.hasZIndex">
-            <a-menu @click="(menu: any) => onContextMenuClick(node, menu.key)">
+            <a-menu @click="(menu) => onContextMenuClick(node, menu.key)">
               <a-menu-item key="1">图层置为顶层</a-menu-item>
               <a-menu-item key="2">图层上移一层</a-menu-item>
               <a-menu-item key="3">图层下移一层</a-menu-item>
@@ -58,12 +58,12 @@ const checkedChange = (keys: string[], e: any) => {
   const layer = layersObj[e.node.id]
   // console.log("点击的矢量图层", layer)
   if (layer) {
-    if (layer.isAdded === false) {
+    if (!layer.isAdded) {
       mapWork.addLayer(layer)
     }
 
     // 特殊处理同目录下的单选的互斥的节点，可在config对应图层节点中配置"radio":true即可
-    if (layer.options && layer.options.radio && e.checked) {
+    if (layer.options?.radio && e.checked) {
       // 循环所有的图层
       for (const i in layersObj) {
         const item = layersObj[i]
@@ -82,7 +82,7 @@ const checkedChange = (keys: string[], e: any) => {
     }
 
     // 处理图层的关联事件
-    if (layer.options && layer.options.onWidget) {
+    if (layer.options?.onWidget) {
       if (e.checked) {
         if (lastWidget) {
           disable(lastWidget)
@@ -102,16 +102,18 @@ const checkedChange = (keys: string[], e: any) => {
     }
     if (keys.indexOf(e.node.id) !== -1) {
       layer.show = true
-      layer.readyPromise &&
+      if (!layer.options.noCenter) {
+        // 在对应config.json图层节点配置 noCenter:true 可以不定位
         layer.readyPromise.then(function (layer) {
-          layer.flyTo()
+          layer.flyTo({ scale: 2 })
         })
+      }
     } else {
       layer.show = false
     }
 
     // 处理图层构件树控件
-    if (layer.options && layer.options.scenetree) {
+    if (layer.options?.scenetree) {
       initLayerTree(layer)
     }
   }
@@ -190,11 +192,20 @@ function initTree() {
   for (let i = layers.length - 1; i >= 0; i--) {
     const layer = layers[i] // 创建图层
 
+    if (layer == null || !layer.options || layer.isPrivate) {
+      continue
+    }
+    const item = layer.options
+    if (!item.name || item.name === "未命名") {
+      console.log("未命名图层不加入图层管理", layer)
+      continue
+    }
+
     if (!layer._hasMapInit && layer.pid === -1 && layer.id !== 99) {
       layer.pid = 99 // 示例中创建的图层都放到99分组下面
     }
 
-    layersObj[layer.id] = layers
+    layersObj[layer.id] = layer
 
     if (layer && layer.pid === -1) {
       const node: any = reactive({
@@ -203,7 +214,6 @@ function initTree() {
         key: layer.id,
         id: layer.id,
         pId: layer.pid,
-        uuid: layer.uuid,
         hasZIndex: layer.hasZIndex,
         hasOpacity: layer.hasOpacity,
         opacity: 100 * (layer.opacity || 0)
@@ -216,6 +226,12 @@ function initTree() {
 
       if (layer.options.open !== false) {
         expandedKeys.value.push(node.key)
+      }
+
+      if (layer.isAdded && layer.show) {
+        nextTick(() => {
+          checkedKeys.value.push(node.key)
+        })
       }
     }
   }
@@ -234,7 +250,16 @@ function initTree() {
 }
 function findChild(parent: any, list: any[]) {
   return list
-    .filter((item: any) => item.pid === parent.id)
+    .filter((layer: any) => {
+      if (layer == null || !layer.options || layer.isPrivate) {
+        return false
+      }
+      const item = layer.options
+      if (!item.name || item.name === "未命名") {
+        return false
+      }
+      return layer.pid === parent.id
+    })
     .reverse()
     .map((item: any, i: number) => {
       const node: any = {
@@ -243,7 +268,6 @@ function findChild(parent: any, list: any[]) {
         key: item.id,
         id: item.id,
         pId: item.pid,
-        uuid: item.uuid,
         hasZIndex: item.hasZIndex,
         hasOpacity: item.hasOpacity,
         opacity: 100 * (item.opacity || 0),

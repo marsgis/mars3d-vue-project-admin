@@ -7,8 +7,9 @@ import * as mars3d from "mars3d"
 
 import { App } from "vue"
 import { injectState, key } from "@mars/common/store/widget"
-import widgetStore from "@mars/widget-store"
-import MarsUI from "@mars/components/mars-ui"
+import store from "./widget-store"
+import MarsUIInstall from "@mars/components/mars-ui"
+import "@mars/components/mars-ui/common"
 
 export default {
   install: (app: App) => {
@@ -17,8 +18,8 @@ export default {
     app.config.globalProperties.mars3d = mars3d
 
     // mars3d基础项目
-    app.use(MarsUI)
-    app.use(injectState(widgetStore), key)
+    MarsUIInstall(app)
+    app.use(injectState(store), key)
 
     return app
   }

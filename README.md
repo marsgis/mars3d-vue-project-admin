@@ -1,13 +1,15 @@
-<h1>mars3d-vue-project-admin</h1> 
- 
+<div align="center"> <a href="https://github.com/anncwb/vue-vben-admin"> <img alt="VbenAdmin Logo" width="200" height="200" src="https://anncwb.github.io/anncwb/images/logo.png"> </a> <br> <br>
+
+[![license](https://img.shields.io/github/license/anncwb/vue-vben-admin.svg)](LICENSE)
+
+<h1>Vue vben admin</h1>
+</div>
+
 
 ## 简介
 
-Vue Mars3D Admin 是一个基于[vue-vben-admin](https://github.com/anncwb/vue-vben-admin) 和 [mars3d-vue-project](https://github.com/marsgis/mars3d-vue-project) 集成后的免费开源的中后台和三维可视化项目模版。
+Vue Vben Admin 是一个免费开源的中后台模版。使用了最新的`vue3`,`vite2`,`TypeScript`等主流技术开发，开箱即用的中后台前端解决方案，也可用于学习参考。
 
-使用了最新的`vue3`,`vite2`,`TypeScript`等主流技术开发，开箱即用的中后台前端解决方案，也可用于学习参考。
-
- 
 ## 特性
 
 - **最新技术栈**：使用 Vue3/vite2 等前端前沿技术开发
@@ -17,12 +19,31 @@ Vue Mars3D Admin 是一个基于[vue-vben-admin](https://github.com/anncwb/vue-v
 - **Mock 数据** 内置 Mock 数据方案
 - **权限** 内置完善的动态路由权限生成方案
 - **组件** 二次封装了多个常用的组件
- 
- 
-## 文档
-- [mars3d-vue-project 官方教程地址](http://mars3d.cn/dev/guide/project/vue.html)
-- [vue-vben-admin 官方文档地址](https://vvbin.cn/doc-next/)
 
+## 预览
+
+- [vue-vben-admin](https://vben.vvbin.cn/) - 完整版中文站点
+- [vue-vben-admin-gh-pages](https://anncwb.github.io/vue-vben-admin/) - 完整版 github 站点
+- [vben-admin-thin-next](https://vben.vvbin.cn/thin/next/) - 简化版中文站点
+- [vben-admin-thin-gh-pages](https://anncwb.github.io/vben-admin-thin-next/) - 简化版 github 站点
+
+测试账号: vben/123456
+
+<p align="center">
+    <img alt="VbenAdmin Logo" width="100%" src="https://anncwb.github.io/anncwb/images/preview1.png">
+    <img alt="VbenAdmin Logo" width="100%" src="https://anncwb.github.io/anncwb/images/preview2.png">
+    <img alt="VbenAdmin Logo" width="100%" src="https://anncwb.github.io/anncwb/images/preview3.png">
+</p>
+
+### 使用 Gitpod
+
+在 Gitpod（适用于 GitHub 的免费在线开发环境）中打开项目，并立即开始编码.
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/anncwb/vue-vben-admin)
+
+## 文档
+
+[文档地址](https://doc.vvbin.cn/)
 
 ## 准备
 
@@ -35,87 +56,47 @@ Vue Mars3D Admin 是一个基于[vue-vben-admin](https://github.com/anncwb/vue-v
 - [Ant-Design-Vue](https://2x.antdv.com/docs/vue/introduce-cn/) - ui 基本使用
 - [Mock.js](https://github.com/nuysoft/Mock) - mockjs 基本语法
 
+## 安装使用
 
-## 下载运行项目
-
-### 下载代码
-
-- [Github](https://github.com/marsgis/mars3d-vue-project-admin)
-
-```
-git clone git@github.com:marsgis/mars3d-vue-project-admin.git
-```
-
-- [Gitee](https://gitee.com/marsgis/mars3d-vue-project-admin)：国内码云，下载速度快些。
-
-```
-git clone git@gitee.com:marsgis/mars3d-vue-project-admin.git
-```
-### 运行环境
-
-- 推荐使用 vscode，安装参考[开发环境搭建教程](http://mars3d.cn/dev/guide/start/env.html)
-- 安装 vscode 插件，推荐安装 volar（并禁用 vetur）、ESlint 、 Prettier
-- 配置 vscode 参数
-
-```json
-// setting.json相关配置
-{
-  "eslint.format.enable": true,
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[vue]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
-}
-```
-
-### 运行命令
-
-#### 首次运行前安装依赖  
-```bash
-cd mars3d-vue-project-admin
-
-yarn install 
-```
-
-#### 启动开发环境
+- 获取项目代码
 
 ```bash
-yarn serve
+git clone https://github.com/anncwb/vue-vben-admin.git
 ```
 
-#### 编译构建
+- 安装依赖
 
 ```bash
-yarn build
+cd vue-vben-admin
+
+pnpm install
+
 ```
 
-## 运行效果
- 
-<p align="center">
-    <img alt="VbenAdmin Logo" width="100%" src="https://anncwb.github.io/anncwb/images/preview1.png">
-    <img alt="VbenAdmin Logo" width="100%" src="https://anncwb.github.io/anncwb/images/preview2.png">
-    <img alt="VbenAdmin Logo" width="100%" src="https://anncwb.github.io/anncwb/images/preview3.png">
-</p>
+- 运行
 
+```bash
+pnpm serve
+```
 
+- 打包
 
+```bash
+pnpm build
+```
 
- 
+## 更新日志
+
+[CHANGELOG](./CHANGELOG.zh_CN.md)
+
+## 项目地址
+
+- [vue-vben-admin](https://github.com/anncwb/vue-vben-admin) - 完整版
+- [vue-vben-admin-thin-next](https://github.com/anncwb/vben-admin-thin-next) - 简化版
 
 ## 如何贡献
 
-非常欢迎你的加入！[提一个 Issue](http://github.com/marsgis/mars3d-vue-project-admin/issues) 或者提交一个 Pull Request。
+非常欢迎你的加入！[提一个 Issue](https://github.com/anncwb/vue-vben-admin/issues/new/choose) 或者提交一个 Pull Request。
 
 **Pull Request:**
 
@@ -143,42 +124,48 @@ yarn build
   - `types` 类型定义文件更改
   - `wip` 开发中
 
-
-
 ## 浏览器支持
 
 本地开发推荐使用`Chrome 80+` 浏览器
 
 支持现代浏览器, 不支持 IE
 
-| IE | Edge | Firefox | Chrome | Safari |
+| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt=" Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt=" Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari |
 | :-: | :-: | :-: | :-: | :-: |
 | not support | last 2 versions | last 2 versions | last 2 versions | last 2 versions |
 
- 
+## 相关仓库
+
+如果这些插件对你有帮助，可以给一个 star 支持下
+
+- [vite-plugin-mock](https://github.com/anncwb/vite-plugin-mock) - 用于本地及开发环境数据 mock
+- [vite-plugin-html](https://github.com/anncwb/vite-plugin-html) - 用于 html 模版转换及压缩
+- [vite-plugin-compression](https://github.com/anncwb/vite-plugin-compression) - 用于打包输出.gz|.brotil 文件
+- [vite-plugin-svg-icons](https://github.com/anncwb/vite-plugin-svg-icons) - 用于快速生成 svg 雪碧图
 
 ## 后台整合示例
 
 - [lamp-cloud](https://github.com/zuihou/lamp-cloud) - 基于 SpringCloud Alibaba 的微服务中后台快速开发平台
 - [matecloud](https://github.com/matevip/matecloud) - MateCloud 微服务脚手架，基于 Spring Cloud 2020.0.3、SpringBoot 2.5.3 的全开源平台
-  
 
+## 维护者
 
+[@Vben](https://github.com/anncwb)
 
-  
-## Mars3D 是什么
+## 捐赠
 
-> `Mars3D平台` 是[火星科技](http://marsgis.cn/)研发的一款基于 WebGL 技术实现的三维客户端开发平台，基于[Cesium](https://cesium.com/cesiumjs/)优化提升与 B/S 架构设计，支持多行业扩展的轻量级高效能 GIS 开发平台，能够免安装、无插件地在浏览器中高效运行，并可快速接入与使用多种 GIS 数据和三维模型，呈现三维空间的可视化，完成平台在不同行业的灵活应用。
+如果你觉得这个项目对你有帮助，你可以帮作者买一杯咖啡表示支持!
 
-> Mars3D 平台可用于构建无插件、跨操作系统、 跨浏览器的三维 GIS 应用程序。平台使用 WebGL 来进行硬件加速图形化，跨平台、跨浏览器来实现真正的动态大数据三维可视化。通过 Mars3D 产品可快速实现浏览器和移动端上美观、流畅的三维地图呈现与空间分析。
+![donate](https://anncwb.github.io/anncwb/images/sponsor.png)
 
-### 相关网站
+<a style="display: block;width: 100px;height: 50px;line-height: 50px; color: #fff;text-align: center; background: #408aed;border-radius: 4px;" href="https://www.paypal.com/paypalme/cvvben">Paypal Me</a>
 
-- Mars3D 官网：[http://mars3d.cn](http://mars3d.cn)
+## 交流
 
-- Mars3D 开源项目列表：[https://github.com/marsgis/mars3d](https://github.com/marsgis/mars3d)
+`Vue-vben-Admin` 是完全开源免费的项目，在帮助开发者更方便地进行中大型管理系统开发，同时也提供 QQ 交流群使用问题欢迎在群内提问。
 
-## 版权说明
+- QQ 群 `569291866`
 
-1. Mars3D 平台由[火星科技](http://marsgis.cn/)自主研发，拥有所有权利。
-2. 任何个人或组织可以在遵守相关要求下可以免费无限制使用。
+## License
+
+[MIT © Vben-2020](./LICENSE)

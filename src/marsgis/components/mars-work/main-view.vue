@@ -2,7 +2,7 @@
   <ConfigProvider :locale="locale">
     <div class="mars-main-view" id="mars-main-view">
       <div id="centerDiv" class="centerDiv-container">
-        <mars-map :url="configUrl" @onload="marsOnload" />
+        <mars-map :url="configUrl" :options="mapOptions" @onload="marsOnload"  />
       </div>
       <template v-if="loaded">
         <template v-for="comp in widgets" :key="comp.key">
@@ -17,7 +17,7 @@
 /**
  * 渲染主入口
  * @copyright 火星科技 mars3d.cn
- * @author 木遥 2022-02-19
+ * @author 火星渣渣灰 2022-02-19
  */
 import zhCN from "ant-design-vue/es/locale/zh_CN"
 import { computed, provide, ref } from "vue"
@@ -33,7 +33,17 @@ const widgetStore = useWidgetStore()
 const widgets = computed(() => widgetStore.state.widgets)
 const openAtStart = computed(() => widgetStore.state.openAtStart)
 
-const configUrl = `${process.env.BASE_URL}config/config.json`
+const configUrl = `${process.env.BASE_URL}config/config.json?time=${new Date().getTime()}`
+
+const props = withDefaults(
+  defineProps<{
+    mapOptions?: any
+  }>(),
+  {
+    mapOptions: () => ({})
+  }
+)
+
 
 let mapInstance: any = null
 provide("getMapInstance", () => {

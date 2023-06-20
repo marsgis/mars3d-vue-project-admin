@@ -1,7 +1,7 @@
 /**
  * 组件中开启 map.ts 生命周期
  * @copyright 火星科技 mars3d.cn
- * @author 木遥 2022-02-19
+ * @author 火星渣渣灰 2022-02-19
  */
 import { inject, onBeforeMount, onBeforeUnmount } from "vue"
 

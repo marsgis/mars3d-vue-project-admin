@@ -13,8 +13,7 @@ export default defineComponent({
       type: String
     },
     color: {
-      type: String,
-      default: "#fff"
+      type: String
     },
     width: {
       type: [String, Number],
@@ -42,5 +41,6 @@ export default defineComponent({
 <style lang="less" scoped>
 .mars-icon {
   vertical-align: middle;
+  line-height: 1;
 }
 </style>

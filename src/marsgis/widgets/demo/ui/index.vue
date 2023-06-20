@@ -1,15 +1,15 @@
 <template>
-  <mars-pannel top="10" bottom="10" right="10" width="400" :before-close="beforeClose" closeable>
+  <mars-dialog :draggable="false" top="10" bottom="10" right="10" width="400" :before-close="beforeClose" closeable>
     <a-form :model="formState" :rules="rules" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }">
       <a-collapse v-model:activeKey="activeKey">
         <!-- 自定义切换图标 -->
         <template #expandIcon>
-          <mars-icon icon="down-c" class="icon-vertical-a" />
+          <mars-icon icon="down-c" />
         </template>
         <a-collapse-panel key="1" header="表单控件1">
           <!-- 自定义面板右侧图标 -->
           <template #extra>
-            <mars-icon icon="config" class="icon-vertical-a" />
+            <mars-icon icon="config" />
           </template>
           <a-form-item label="简单文本" name="url">
             <mars-input v-model:value="formState.url" :allowClear="true" @change="onTextChange" />
@@ -76,15 +76,15 @@
           <div class="f-tac">
             <a-space>
               <mars-button size="middle" @click="onClickMessage">
-                <template #icon><mars-icon icon="alarm" class="icon-vertical-a" /></template>
+                <template #icon><mars-icon icon="alarm" /></template>
                 消息
               </mars-button>
               <mars-button size="middle" @click="onClickNotify">
-                <template #icon><mars-icon icon="download-one" class="icon-vertical-a" /></template>
+                <template #icon><mars-icon icon="download-one" /></template>
                 提示
               </mars-button>
               <mars-button size="middle" @click="onClickAlert">
-                <template #icon><mars-icon icon="download-one" class="icon-vertical-a" /></template>
+                <template #icon><mars-icon icon="download-one" /></template>
                 弹窗
               </mars-button>
             </a-space>
@@ -92,7 +92,7 @@
         </a-collapse-panel>
 
         <a-collapse-panel key="2" header="表格控件">
-          <a-table
+          <mars-table
             size="small"
             :customRow="customTableRow"
             :row-selection="rowSelection"
@@ -107,7 +107,7 @@
                 <a>{{ text }}</a>
               </template>
             </template>
-          </a-table>
+          </mars-table>
         </a-collapse-panel>
         <a-collapse-panel key="3" header="树控件">
           <mars-tree checkable :tree-data="treeData" v-model:expandedKeys="expandedKeys" v-model:checkedKeys="checkedKeys" @check="onCheckTreeItem">
@@ -121,17 +121,17 @@
       <div class="f-tac">
         <a-space>
           <mars-button size="middle" @click="onClickLoading">
-            <template #icon><mars-icon icon="find" class="icon-vertical-a" /></template>
+            <template #icon><mars-icon icon="find" /></template>
             进度条1
           </mars-button>
           <mars-button size="middle" @click="onClickTopLoading">
-            <template #icon><mars-icon icon="planet" class="icon-vertical-a" /></template>
+            <template #icon><mars-icon icon="planet" /></template>
             进度条2
           </mars-button>
         </a-space>
       </div>
     </a-form>
-  </mars-pannel>
+  </mars-dialog>
 </template>
 
 <script setup lang="ts">
@@ -377,8 +377,7 @@ onMounted(() => {
           title: layer.name,
           key: layer.id,
           id: layer.id,
-          pId: layer.pid,
-          uuid: layer.uuid
+          pId: layer.pid
         }
         node.children = findChild(node, layers)
         treeData.value.push(node)
@@ -396,8 +395,7 @@ function findChild(parent: any, list: any[]) {
         title: item.name,
         key: item.id,
         id: item.id,
-        pId: item.pid,
-        uuid: item.uuid
+        pId: item.pid
       }
       const nodeLayer = mapWork.createLayer(item) //  创建图层
       layersObj[item.id] = nodeLayer

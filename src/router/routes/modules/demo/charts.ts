@@ -18,7 +18,7 @@ const charts: AppRouteModule = {
       path: 'marsgis',
       name: 'Marsgis',
       meta: {
-        title: '三维地图',
+        title: 'Mars3D地图',
       },
       component: () => import('/@/marsgis/views/index.vue'),
     },
