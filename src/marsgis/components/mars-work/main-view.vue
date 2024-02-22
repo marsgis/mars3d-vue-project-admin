@@ -2,7 +2,7 @@
   <ConfigProvider :locale="locale">
     <div class="mars-main-view" id="mars-main-view">
       <div id="centerDiv" class="centerDiv-container">
-        <mars-map :url="configUrl" :options="mapOptions" @onload="marsOnload"  />
+        <mars-map :url="configUrl" :options="mapOptions" @onload="marsOnload" />
       </div>
       <template v-if="loaded">
         <template v-for="comp in widgets" :key="comp.key">
@@ -44,7 +44,6 @@ const props = withDefaults(
   }
 )
 
-
 let mapInstance: any = null
 provide("getMapInstance", () => {
   return mapInstance
@@ -68,6 +67,8 @@ const marsOnload = (map: any) => {
   position: relative;
 }
 .centerDiv-container {
+  background-color: var(--mars-bg-base) !important;
+  color: var(--mars-base-color) !important;
   height: 100%;
   width: 100%;
   overflow: hidden;
