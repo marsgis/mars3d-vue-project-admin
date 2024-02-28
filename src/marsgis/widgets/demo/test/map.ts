@@ -46,7 +46,7 @@ export function onMounted(mapInstance) {
   map.addEffect(snowEffect)
   map.addEffect(snowCover)
 
-  Cesium.Resource.fetchJson({ url: "http://wthrcdn.etouch.cn/weather_mini?city=青岛" })
+  mars3d.Util.fetchJson({ url: "http://wthrcdn.etouch.cn/weather_mini?city=青岛" })
     .then((msg) => {
       const data = JSON.parse(msg)
       const tianqiForcat = data.data.forecast[0].type
