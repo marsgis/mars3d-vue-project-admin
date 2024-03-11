@@ -1,11 +1,11 @@
-import type { ErrorMessageMode } from '/#/axios';
-import { useMessage } from '/@/hooks/web/useMessage';
-import { useI18n } from '/@/hooks/web/useI18n';
-// import router from '/@/router';
-// import { PageEnum } from '/@/enums/pageEnum';
-import { useUserStoreWithOut } from '/@/store/modules/user';
-import projectSetting from '/@/settings/projectSetting';
-import { SessionTimeoutProcessingEnum } from '/@/enums/appEnum';
+import type { ErrorMessageMode } from '#/axios';
+import { useMessage } from '@/hooks/web/useMessage';
+import { useI18n } from '@/hooks/web/useI18n';
+// import router from '@/router';
+// import { PageEnum } from '@/enums/pageEnum';
+import { useUserStoreWithOut } from '@/store/modules/user';
+import projectSetting from '@/settings/projectSetting';
+import { SessionTimeoutProcessingEnum } from '@/enums/appEnum';
 
 const { createMessage, createErrorModal } = useMessage();
 const error = createMessage.error!;
@@ -33,7 +33,8 @@ export function checkStatus(
       if (stp === SessionTimeoutProcessingEnum.PAGE_COVERAGE) {
         userStore.setSessionTimeout(true);
       } else {
-        userStore.logout(true);
+        // 被动登出，带redirect地址
+        userStore.logout(false);
       }
       break;
     case 403:

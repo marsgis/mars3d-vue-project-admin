@@ -2,10 +2,10 @@
   import { computed, defineComponent, h, unref } from 'vue';
   import BasicButton from './BasicButton.vue';
   import { Popconfirm } from 'ant-design-vue';
-  import { extendSlots } from '/@/utils/helper/tsxHelper';
+  import { extendSlots } from '@/utils/helper/tsxHelper';
   import { omit } from 'lodash-es';
   import { useAttrs } from '@vben/hooks';
-  import { useI18n } from '/@/hooks/web/useI18n';
+  import { useI18n } from '@/hooks/web/useI18n';
 
   const props = {
     /**
@@ -38,8 +38,9 @@
       });
 
       return () => {
-        const bindValues = omit(unref(getBindValues), 'icon');
-        const btnBind = omit(bindValues, 'title') as any;
+        // 用 omit 剔除一些已知可能导致异常的属性
+        const bindValues = omit(unref(getBindValues), 'icon', 'color');
+        const btnBind = omit(unref(getBindValues), 'title') as any;
         if (btnBind.disabled) btnBind.color = '';
         const Button = h(BasicButton, btnBind, extendSlots(slots));
 

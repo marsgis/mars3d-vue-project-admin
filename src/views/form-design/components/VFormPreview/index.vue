@@ -4,7 +4,7 @@
 <template>
   <Modal
     title="预览(支持布局)"
-    :visible="visible"
+    :open="visible"
     @ok="handleGetData"
     @cancel="handleCancel"
     okText="获取数据"
@@ -14,7 +14,7 @@
     :width="900"
   >
     <VFormCreate
-      :form-config="formConfig"
+      :form-config="formConfig as any"
       v-model:fApi="fApi"
       v-model:formModel="formModel"
       @submit="onSubmit"
@@ -36,6 +36,7 @@
   import JsonModal from '../VFormDesign/components/JsonModal.vue';
   import { IToolbarMethods } from '../../typings/form-type';
   import { Modal } from 'ant-design-vue';
+
   export default defineComponent({
     name: 'VFormPreview',
     components: {
@@ -64,7 +65,7 @@
       const showModal = (jsonData: IFormConfig) => {
         // console.log('showModal-', jsonData);
         formatRules(jsonData.schemas);
-        state.formConfig = jsonData;
+        state.formConfig = jsonData as any;
         state.visible = true;
       };
 

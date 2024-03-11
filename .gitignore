@@ -32,9 +32,3 @@ package-lock.json
 pnpm-lock.yaml
 
 .history
-
-/node_modules
-public/lib/CesiumUnminified/
-packages/mars3d/dist/plugins/
-packages/mars3d/node_modules/
-mars3d-*src.*

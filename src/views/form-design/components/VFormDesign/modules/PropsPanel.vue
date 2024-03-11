@@ -29,6 +29,7 @@
   import { useFormDesignState } from '../../../hooks/useFormDesignState';
   import { customComponents } from '../../../core/formItemConfig';
   import { TabPane, Tabs } from 'ant-design-vue';
+
   type ChangeTabKey = 1 | 2;
   export interface IPropsPanel {
     changeTab: (key: ChangeTabKey) => void;
@@ -62,12 +63,10 @@
     box-sizing: border-box;
 
     form {
-      position: absolute;
       width: 100%;
-      height: calc(100% - 50px);
+      height: 85vh;
       margin-right: 10px;
-      overflow-x: hidden;
-      overflow-y: auto;
+      overflow: hidden auto;
     }
 
     .hint-box {

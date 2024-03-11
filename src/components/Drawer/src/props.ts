@@ -1,6 +1,6 @@
 import type { PropType } from 'vue';
 
-import { useI18n } from '/@/hooks/web/useI18n';
+import { useI18n } from '@/hooks/web/useI18n';
 
 const { t } = useI18n();
 
@@ -30,7 +30,7 @@ export const basicProps = {
   title: { type: String, default: '' },
   loadingText: { type: String },
   showDetailBack: { type: Boolean, default: true },
-  visible: { type: Boolean },
+  open: { type: Boolean },
   loading: { type: Boolean },
   maskClosable: { type: Boolean, default: true },
   getContainer: {

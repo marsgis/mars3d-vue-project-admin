@@ -4,7 +4,7 @@
 <template>
   <Modal
     title="预览(不支持布局)"
-    :visible="state.visible"
+    :open="state.visible"
     @ok="handleGetData"
     @cancel="handleCancel"
     okText="获取数据"
@@ -18,7 +18,7 @@
   </Modal>
 </template>
 <script lang="ts" setup>
-  import { BasicForm, useForm } from '/@/components/Form/index';
+  import { BasicForm, useForm } from '@/components/Form';
   import { reactive, ref, computed } from 'vue';
   import { IFormConfig } from '../../typings/v-form-component';
   import { IAnyObject } from '../../typings/base-type';
@@ -48,7 +48,7 @@
    * @param jsonData
    */
   const showModal = (jsonData: IFormConfig) => {
-    state.formConfig = jsonData;
+    state.formConfig = jsonData as any;
     state.visible = true;
   };
 

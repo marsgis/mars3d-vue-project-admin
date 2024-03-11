@@ -29,7 +29,7 @@ const MarsColorPicker = defineComponent({
     const visible = ref(false)
     let colorObject: any = null
 
-    console.log("传递过来的", props.hiddenAlpha)
+    // console.log("传递过来的", props.hiddenAlpha)
 
 
     const changeColor = (color: any) => {
@@ -76,7 +76,7 @@ const MarsColorPicker = defineComponent({
           placement: "right",
           overlayClassName: props.hiddenAlpha ? "overlayClassName" : "", // 打开的面板样式,隐藏透明度面板
           // overlayClassName: "overlayClassName", // 打开的面板样式,隐藏透明度面板
-          visible: visible.value,
+          open: visible.value,
           "onUpdate:visible": (v: boolean) => {
             visible.value = v
           },

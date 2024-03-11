@@ -115,8 +115,8 @@ const props = withDefaults(defineProps<Props>(), {
   defaultFold: false,
   minWidth: 100,
   minHeight: 100,
-  maxWidth: 100000,
-  maxHeight: 1000,
+  maxWidth: window.innerWidth,
+  maxHeight: window.innerHeight,
   zIndex: 900
 })
 
@@ -156,7 +156,7 @@ const mergeProps = computed(() => {
 
   if (!isAllowValue(newProps.left) && !isAllowValue(newProps.right)) {
     // left right 都不存在时默认出现在左侧
-    newProps.left = 10
+    newProps.right = 10
   }
   if (!isAllowValue(newProps.top) && !isAllowValue(newProps.bottom)) {
     // top bottom 都不存在时默认出现在顶部
@@ -366,13 +366,17 @@ function setSize(attr: "width" | "height", v) {
     let value = v
     switch (attr) {
       case "width": {
-        value = Math.max(mergeProps.value.minWidth, value)
-        value = Math.min(mergeProps.value.maxWidth, value, warpperEle.offsetWidth)
+        if (!isPercentage(value)) {
+          value = Math.max(mergeProps.value.minWidth, value)
+          value = Math.min(mergeProps.value.maxWidth, value, warpperEle.offsetWidth)
+        }
         break
       }
       case "height": {
-        value = Math.max(mergeProps.value.minHeight, value)
-        value = Math.min(mergeProps.value.maxHeight, value, warpperEle.offsetHeight)
+        if (!isPercentage(value)) {
+          value = Math.max(mergeProps.value.minHeight, value)
+          value = Math.min(mergeProps.value.maxHeight, value, warpperEle.offsetHeight)
+        }
         break
       }
     }
@@ -424,9 +428,9 @@ onUnmounted(() => {
 // 处理高度超出的情况
 function autoNiceHeight() {
   if (observeDialog) {
-    const isExceed = warpperEle.offsetHeight < dialogRef.value.offsetHeight + dialogRef.value.offsetTop
+    const niceHeight = warpperEle.offsetHeight - dialogRef.value.offsetTop - 30
+    const isExceed = niceHeight < dialogRef.value.offsetHeight
     if (isExceed) {
-      const niceHeight = warpperEle.offsetHeight - dialogRef.value.offsetTop
       dialogRef.value.style.height = autoUnit(niceHeight)
     }
   }
@@ -439,11 +443,21 @@ function resize() {
     return
   }
 
-  if (pb.offsetTop + pb.offsetHeight > warpperEle.offsetHeight) {
-    setSize("height", warpperEle.offsetHeight - pb.offsetTop)
+  const niceHeight = warpperEle.offsetHeight - pb.offsetTop - 30
+  if (pb.offsetHeight > niceHeight) {
+    setSize("height", niceHeight)
   }
   if (pb.offsetLeft + pb.offsetWidth > warpperEle.offsetWidth) {
     setSize("width", warpperEle.offsetWidth - pb.offsetLeft)
+  }
+}
+
+// 处理百分比
+function isPercentage(value) {
+  if (typeof value === "string") {
+    return value.search("%") !== -1
+  } else {
+    return false
   }
 }
 
@@ -602,6 +616,7 @@ export default {
 
     .title {
       font-size: 16px;
+      color: #ffffff !important;
     }
 
     .close-btn {
@@ -621,6 +636,7 @@ export default {
 
   .mars-dialog__content {
     height: 100%;
+    width: 100%;
     overflow: auto;
     padding: 5px;
   }

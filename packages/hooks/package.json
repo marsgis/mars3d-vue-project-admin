@@ -12,6 +12,7 @@
   },
   "license": "MIT",
   "sideEffects": false,
+  "type": "module",
   "exports": {
     ".": {
       "default": "./src/index.ts"
@@ -29,8 +30,9 @@
     "lint": "pnpm eslint ."
   },
   "dependencies": {
-    "@vueuse/core": "^9.13.0",
-    "vue": "^3.2.47"
+    "@vueuse/core": "^10.7.2",
+    "lodash-es": "^4.17.21",
+    "vue": "^3.4.19"
   },
   "devDependencies": {
     "@vben/types": "workspace:*"

@@ -1,5 +1,5 @@
 import contextMenuVue from './ContextMenu.vue';
-import { isClient } from '/@/utils/is';
+import { isClient } from '@/utils/is';
 import { CreateContextOptions, ContextMenuProps } from './typing';
 import { createVNode, render } from 'vue';
 
@@ -34,7 +34,7 @@ export const createContextMenu = function (options: CreateContextOptions) {
 
     if (options.event) {
       propsData.customEvent = event;
-      propsData.axis = { x: event.clientX, y: event.clientY };
+      propsData.axis = { x: event.clientX, y: event.clientY + body.scrollTop }; // y坐标需加上body往上滚动的Y
     }
 
     const vm = createVNode(contextMenuVue, propsData);

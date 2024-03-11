@@ -52,18 +52,18 @@
         {{ t('sys.login.registerButton') }}
       </Button> -->
     </FormItem>
-    <ARow class="enter-x">
+    <ARow class="enter-x" :gutter="[16, 16]">
       <ACol :md="8" :xs="24">
         <Button block @click="setLoginState(LoginStateEnum.MOBILE)">
           {{ t('sys.login.mobileSignInFormTitle') }}
         </Button>
       </ACol>
-      <ACol :md="8" :xs="24" class="!my-2 !md:my-0 xs:mx-0 md:mx-2">
+      <ACol :md="8" :xs="24">
         <Button block @click="setLoginState(LoginStateEnum.QR_CODE)">
           {{ t('sys.login.qrSignInFormTitle') }}
         </Button>
       </ACol>
-      <ACol :md="6" :xs="24">
+      <ACol :md="8" :xs="24">
         <Button block @click="setLoginState(LoginStateEnum.REGISTER)">
           {{ t('sys.login.registerButton') }}
         </Button>
@@ -94,12 +94,12 @@
   } from '@ant-design/icons-vue';
   import LoginFormTitle from './LoginFormTitle.vue';
 
-  import { useI18n } from '/@/hooks/web/useI18n';
-  import { useMessage } from '/@/hooks/web/useMessage';
+  import { useI18n } from '@/hooks/web/useI18n';
+  import { useMessage } from '@/hooks/web/useMessage';
 
-  import { useUserStore } from '/@/store/modules/user';
+  import { useUserStore } from '@/store/modules/user';
   import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from './useLogin';
-  import { useDesign } from '/@/hooks/web/useDesign';
+  import { useDesign } from '@/hooks/web/useDesign';
   //import { onKeyStroke } from '@vueuse/core';
 
   const ACol = Col;

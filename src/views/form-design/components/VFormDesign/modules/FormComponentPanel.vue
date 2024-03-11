@@ -103,8 +103,7 @@
       .list-main {
         display: flex;
         flex-wrap: wrap;
-        align-content: flex-start;
-        justify-content: flex-start;
+        place-content: flex-start flex-start;
 
         .layout-width {
           width: 100%;
@@ -131,15 +130,16 @@
     }
 
     .draggable-box {
+      height: calc(100vh - 120px);
       // width: 100%;
+      overflow: auto;
+
       .drag-move {
         min-height: 62px;
         cursor: move;
       }
 
       .list-main {
-        height: 100%;
-        overflow: auto;
         // 列表动画
         .list-enter-active {
           transition: all 0.5s;

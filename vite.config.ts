@@ -46,20 +46,23 @@ export default defineApplicationConfig({
           rewrite: (path) => path.replace(new RegExp(`^/upload`), ''),
         },
       },
+      open: true, // 中文
+      warmup: {
+        clientFiles: ['./index.html', './src/{views,components}/*'],
+      },
     },
     css: {
       preprocessorOptions: {
         less: {
           javascriptEnabled: true,
-          additionalData: `
-          @import "${path.resolve(__dirname, 'src/marsgis/components/mars-ui/base.less')}";
-          `,
-        },
-      },
+          additionalData: `@import "${path.resolve(__dirname, "src/marsgis/components/mars-ui/base.less")}";`
+        }
+      }
     },
     plugins: [mars3dPlugin()],
   },
 });
+
 
 function pathResolve(dir: string) {
   return resolve(process.cwd(), '.', dir);

@@ -1,18 +1,18 @@
-import type { AppRouteRecordRaw, AppRouteModule } from '/@/router/types';
+import type { AppRouteRecordRaw, AppRouteModule } from '@/router/types';
 
-import { PAGE_NOT_FOUND_ROUTE, REDIRECT_ROUTE } from '/@/router/routes/basic';
+import { PAGE_NOT_FOUND_ROUTE, REDIRECT_ROUTE } from '@/router/routes/basic';
 
 import { mainOutRoutes } from './mainOut';
-import { PageEnum } from '/@/enums/pageEnum';
-import { t } from '/@/hooks/web/useI18n';
+import { PageEnum } from '@/enums/pageEnum';
+import { t } from '@/hooks/web/useI18n';
 
-// import.meta.globEager() 直接引入所有的模块 Vite 独有的功能
-const modules = import.meta.globEager('./modules/**/*.ts');
+// import.meta.glob() 直接引入所有的模块 Vite 独有的功能
+const modules = import.meta.glob('./modules/**/*.ts', { eager: true });
 const routeModuleList: AppRouteModule[] = [];
 
 // 加入到路由集合中
 Object.keys(modules).forEach((key) => {
-  const mod = modules[key].default || {};
+  const mod = (modules as Recordable)[key].default || {};
   const modList = Array.isArray(mod) ? [...mod] : [mod];
   routeModuleList.push(...modList);
 });
@@ -32,7 +32,7 @@ export const RootRoute: AppRouteRecordRaw = {
 export const LoginRoute: AppRouteRecordRaw = {
   path: '/login',
   name: 'Login',
-  component: () => import('/@/views/sys/login/Login.vue'),
+  component: () => import('@/views/sys/login/Login.vue'),
   meta: {
     title: t('routes.basic.login'),
   },

@@ -6,7 +6,7 @@
 <script lang="ts" setup>
   import { Ref, ref, watch } from 'vue';
   import { Card } from 'ant-design-vue';
-  import { useECharts } from '/@/hooks/web/useECharts';
+  import { useECharts } from '@/hooks/web/useECharts';
 
   const props = defineProps({
     loading: Boolean,
@@ -36,7 +36,7 @@
 
         series: [
           {
-            name: '访问来源',
+            name: '成交占比',
             type: 'pie',
             radius: '80%',
             center: ['50%', '50%'],

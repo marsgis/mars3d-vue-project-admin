@@ -1,7 +1,7 @@
 /**
  * index页面的widget配置
  * @copyright 火星科技 mars3d.cn
- * @author 木遥 2022-02-19
+ * @author 火星渣渣灰 2022-02-19
  */
 import { defineAsyncComponent, markRaw } from "vue"
 import { WidgetState } from "@mars/common/store/widget"

@@ -1,20 +1,20 @@
-import type { UserInfo } from '/#/store';
-import type { ErrorMessageMode } from '/#/axios';
+import type { UserInfo } from '#/store';
+import type { ErrorMessageMode } from '#/axios';
 import { defineStore } from 'pinia';
-import { store } from '/@/store';
-import { RoleEnum } from '/@/enums/roleEnum';
-import { PageEnum } from '/@/enums/pageEnum';
-import { ROLES_KEY, TOKEN_KEY, USER_INFO_KEY } from '/@/enums/cacheEnum';
-import { getAuthCache, setAuthCache } from '/@/utils/auth';
-import { GetUserInfoModel, LoginParams } from '/@/api/sys/model/userModel';
-import { doLogout, getUserInfo, loginApi } from '/@/api/sys/user';
-import { useI18n } from '/@/hooks/web/useI18n';
-import { useMessage } from '/@/hooks/web/useMessage';
-import { router } from '/@/router';
-import { usePermissionStore } from '/@/store/modules/permission';
+import { store } from '@/store';
+import { RoleEnum } from '@/enums/roleEnum';
+import { PageEnum } from '@/enums/pageEnum';
+import { ROLES_KEY, TOKEN_KEY, USER_INFO_KEY } from '@/enums/cacheEnum';
+import { getAuthCache, setAuthCache } from '@/utils/auth';
+import { GetUserInfoModel, LoginParams } from '@/api/sys/model/userModel';
+import { doLogout, getUserInfo, loginApi } from '@/api/sys/user';
+import { useI18n } from '@/hooks/web/useI18n';
+import { useMessage } from '@/hooks/web/useMessage';
+import { router } from '@/router';
+import { usePermissionStore } from '@/store/modules/permission';
 import { RouteRecordRaw } from 'vue-router';
-import { PAGE_NOT_FOUND_ROUTE } from '/@/router/routes/basic';
-import { isArray } from '/@/utils/is';
+import { PAGE_NOT_FOUND_ROUTE } from '@/router/routes/basic';
+import { isArray } from '@/utils/is';
 import { h } from 'vue';
 
 interface UserState {
@@ -110,14 +110,17 @@ export const useUserStore = defineStore({
         this.setSessionTimeout(false);
       } else {
         const permissionStore = usePermissionStore();
+
+        // 动态路由加载（首次）
         if (!permissionStore.isDynamicAddedRoute) {
           const routes = await permissionStore.buildRoutesAction();
-          routes.forEach((route) => {
+          [...routes, PAGE_NOT_FOUND_ROUTE].forEach((route) => {
             router.addRoute(route as unknown as RouteRecordRaw);
           });
-          router.addRoute(PAGE_NOT_FOUND_ROUTE as unknown as RouteRecordRaw);
+          // 记录动态路由加载完成
           permissionStore.setDynamicAddedRoute(true);
         }
+
         goHome && (await router.replace(userInfo?.homePath || PageEnum.BASE_HOME));
       }
       return userInfo;
@@ -150,7 +153,18 @@ export const useUserStore = defineStore({
       this.setToken(undefined);
       this.setSessionTimeout(false);
       this.setUserInfo(null);
-      goLogin && router.push(PageEnum.BASE_LOGIN);
+      if (goLogin) {
+        // 直接回登陆页
+        router.replace(PageEnum.BASE_LOGIN);
+      } else {
+        // 回登陆页带上当前路由地址
+        router.replace({
+          path: PageEnum.BASE_LOGIN,
+          query: {
+            redirect: encodeURIComponent(router.currentRoute.value.fullPath),
+          },
+        });
+      }
     },
 
     /**
@@ -164,6 +178,7 @@ export const useUserStore = defineStore({
         title: () => h('span', t('sys.app.logoutTip')),
         content: () => h('span', t('sys.app.logoutMessage')),
         onOk: async () => {
+          // 主动登出，不带redirect地址
           await this.logout(true);
         },
       });

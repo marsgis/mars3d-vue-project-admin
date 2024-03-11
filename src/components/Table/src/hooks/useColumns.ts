@@ -3,19 +3,20 @@ import type { PaginationProps } from '../types/pagination';
 import type { ComputedRef } from 'vue';
 import { computed, Ref, ref, reactive, toRaw, unref, watch } from 'vue';
 import { renderEditCell } from '../components/editable';
-import { usePermission } from '/@/hooks/web/usePermission';
-import { useI18n } from '/@/hooks/web/useI18n';
-import { isArray, isBoolean, isFunction, isMap, isString } from '/@/utils/is';
+import { usePermission } from '@/hooks/web/usePermission';
+import { useI18n } from '@/hooks/web/useI18n';
+import { isArray, isBoolean, isFunction, isMap, isString } from '@/utils/is';
 import { cloneDeep, isEqual } from 'lodash-es';
-import { formatToDate } from '/@/utils/dateUtil';
+import { formatToDate } from '@/utils/dateUtil';
 import { ACTION_COLUMN_FLAG, DEFAULT_ALIGN, INDEX_COLUMN_FLAG, PAGE_SIZE } from '../const';
+import { ColumnType } from 'ant-design-vue/es/table';
 
 function handleItem(item: BasicColumn, ellipsis: boolean) {
   const { key, dataIndex, children } = item;
   item.align = item.align || DEFAULT_ALIGN;
   if (ellipsis) {
     if (!key) {
-      item.key = dataIndex;
+      item.key = typeof dataIndex == 'object' ? dataIndex.join('-') : dataIndex;
     }
     if (!isBoolean(item.ellipsis)) {
       Object.assign(item, {
@@ -65,7 +66,7 @@ function handleIndexColumn(
 
   columns.unshift({
     flag: INDEX_COLUMN_FLAG,
-    width: 50,
+    width: 60,
     title: t('component.table.index'),
     align: 'center',
     customRender: ({ index }) => {
@@ -150,9 +151,7 @@ export function useColumns(
       const { slots, customRender, format, edit, editRow, flag } = column;
 
       if (!slots || !slots?.title) {
-        // column.slots = { title: `header-${dataIndex}`, ...(slots || {}) };
         column.customTitle = column.title;
-        Reflect.deleteProperty(column, 'title');
       }
       const isDefaultAction = [INDEX_COLUMN_FLAG, ACTION_COLUMN_FLAG].includes(flag!);
       if (!customRender && format && !edit && !isDefaultAction) {
@@ -264,12 +263,19 @@ export function useColumns(
     if (!isArray(columns)) return;
     cacheColumns = columns.filter((item) => !item.flag);
   }
+  /**
+   * 拖拽列宽修改列的宽度
+   */
+  function setColumnWidth(w: number, col: ColumnType<BasicColumn>) {
+    col.width = w;
+  }
 
   return {
     getColumnsRef,
     getCacheColumns,
     getColumns,
     setColumns,
+    setColumnWidth,
     getViewColumns,
     setCacheColumnsByField,
     setCacheColumns,
@@ -291,9 +297,23 @@ function sortFixedColumn(columns: BasicColumn[]) {
     }
     defColumns.push(column);
   }
-  return [...fixedLeftColumns, ...defColumns, ...fixedRightColumns].filter(
-    (item) => !item.defaultHidden,
-  );
+  // 筛选逻辑
+  const filterFunc = (item) => !item.defaultHidden;
+  // 筛选首层显示列（1级表头）
+  const viewColumns = [...fixedLeftColumns, ...defColumns, ...fixedRightColumns].filter(filterFunc);
+  // 筛选>=2级表头（深度优先）
+  const list = [...viewColumns];
+  while (list.length) {
+    const current = list[0];
+    if (Array.isArray(current.children)) {
+      current.children = current.children.filter(filterFunc);
+      list.shift();
+      list.unshift(...current.children);
+    } else {
+      list.shift();
+    }
+  }
+  return viewColumns;
 }
 
 // format cell

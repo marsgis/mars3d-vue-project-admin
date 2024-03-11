@@ -1,13 +1,12 @@
-import { presetTypography, presetUno } from 'unocss';
 import UnoCSS from 'unocss/vite';
 import { type UserConfig } from 'vite';
 
-const commonConfig: UserConfig = {
+const commonConfig: (mode: string) => UserConfig = (mode) => ({
   server: {
     host: true,
   },
   esbuild: {
-    drop: ['debugger'],
+    drop: mode === 'production' ? ['console', 'debugger'] : [],
   },
   build: {
     reportCompressedSize: false,
@@ -17,11 +16,7 @@ const commonConfig: UserConfig = {
       maxParallelFileOps: 3,
     },
   },
-  plugins: [
-    UnoCSS({
-      presets: [presetUno(), presetTypography()],
-    }),
-  ],
-};
+  plugins: [UnoCSS()],
+});
 
 export { commonConfig };

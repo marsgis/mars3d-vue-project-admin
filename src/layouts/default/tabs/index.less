@@ -1,27 +1,42 @@
 @prefix-cls: ~'@{namespace}-multiple-tabs';
-
-html[data-theme='dark'] {
-  .@{prefix-cls} {
-    .ant-tabs-tab {
-      border-bottom: 1px solid @border-color-base;
-    }
-  }
-}
+@prefix-cls-default-layout: ~'@{namespace}-default-layout';
 
 html[data-theme='light'] {
   .@{prefix-cls} {
     .ant-tabs-tab:not(.ant-tabs-tab-active) {
       border: 1px solid #d9d9d9 !important;
+      border-bottom-color: #f0f0f0 !important;
     }
+  }
+}
+
+.@{prefix-cls-default-layout}-out {
+  &.ant-layout-auto-collapse-tabs {
+    .@{prefix-cls} {
+      margin-top: -(@multiple-height + 2);
+      opacity: 0.1;
+
+      &:hover,
+      &--hover {
+        margin-top: 0;
+        transition-delay: 0s;
+        opacity: 1;
+      }
+    }
+  }
+  .@{prefix-cls} {
+    transition:
+      margin 0.2s ease-in-out 0.6s,
+      opacity 0.2s ease-in-out 0.6s;
   }
 }
 
 .@{prefix-cls} {
   z-index: 10;
   height: @multiple-height + 2;
-  line-height: @multiple-height + 2;
-  background-color: @component-background;
   border-bottom: 1px solid @border-color-base;
+  background-color: @component-background;
+  line-height: @multiple-height + 2;
 
   .ant-tabs-small {
     height: @multiple-height;
@@ -29,11 +44,11 @@ html[data-theme='light'] {
 
   .ant-tabs.ant-tabs-card {
     .ant-tabs-nav {
-      padding-top: 2px;
-      height: @multiple-height;
+      height: @multiple-height + 2;
       margin: 0;
-      background-color: @component-background;
+      padding-top: 2px;
       border: 0;
+      background-color: @component-background;
       box-shadow: none;
 
       .ant-tabs-nav-container {
@@ -42,12 +57,12 @@ html[data-theme='light'] {
       }
 
       .ant-tabs-tab {
-        height: calc(@multiple-height - 2px);
+        height: calc(@multiple-height);
         padding-right: 12px;
-        line-height: calc(@multiple-height - 2px);
-        color: @text-color-base;
-        background-color: @component-background;
         transition: none;
+        background-color: @component-background;
+        color: @text-color-base;
+        line-height: calc(@multiple-height);
 
         &:hover {
           .ant-tabs-tab-remove {
@@ -57,13 +72,13 @@ html[data-theme='light'] {
 
         .ant-tabs-tab-remove {
           width: 8px;
-          height: 28px;
-          font-size: 12px;
-          color: inherit;
-          opacity: 0;
-          transition: none;
-          margin-left: 2px;
+          height: 30px;
           margin-right: -4px;
+          margin-left: 2px;
+          transition: none;
+          opacity: 0;
+          color: inherit;
+          font-size: 12px;
 
           &:hover {
             svg {
@@ -92,9 +107,9 @@ html[data-theme='light'] {
       .ant-tabs-tab-active {
         position: relative;
         padding-left: 18px;
-        background: @primary-color;
-        border: 0;
         transition: none;
+        border: 0;
+        background: @primary-color;
 
         span {
           color: @white !important;
@@ -147,11 +162,11 @@ html[data-theme='light'] {
       display: inline-block;
       width: 36px;
       height: @multiple-height;
-      line-height: @multiple-height;
+      border-left: 1px solid @border-color-base;
       color: @text-color-secondary;
+      line-height: @multiple-height;
       text-align: center;
       cursor: pointer;
-      border-left: 1px solid @border-color-base;
 
       &:hover {
         color: @text-color-base;
@@ -172,8 +187,8 @@ html[data-theme='light'] {
       display: inline-block;
       width: 100%;
       height: @multiple-height - 2;
-      padding-left: 0;
       margin-left: -10px;
+      padding-left: 0;
       font-size: 12px;
       cursor: pointer;
       user-select: none;

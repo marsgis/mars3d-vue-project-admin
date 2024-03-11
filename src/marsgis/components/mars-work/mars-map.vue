@@ -7,7 +7,7 @@
  * @copyright 火星科技 mars3d.cn
  * @author 火星渣渣灰 2022-02-19
  */
-import { computed, onUnmounted, onMounted, h, ref } from "vue"
+import { computed, onUnmounted, onMounted, h, ref, toRaw } from "vue"
 import * as mars3d from "mars3d"
 import { getQueryString } from "@mars/utils/mars-util"
 import { getDefaultContextMenu } from "@mars/utils/getDefaultContextMenu"
@@ -34,7 +34,6 @@ const withKeyId = computed(() => `mars3d-container-${props.mapKey}`)
 
 onMounted(() => {
   // 获取配置
-
   mars3d.Util.fetchJson({ url: props.url }).then((data: any) => {
     if (data.map3d) {
       initMars3d(data.map3d)
@@ -47,7 +46,9 @@ onMounted(() => {
 // onload事件将在地图渲染后触发
 const emit = defineEmits(["onload"])
 const initMars3d = (option: any) => {
-  option = mars3d.Util.merge(option, props.options) // 合并配置
+
+
+  option = mars3d.Util.merge(option, toRaw(props.options)) // 合并配置
   map = new mars3d.Map(withKeyId.value, option)
 
   // 绑定当前项目的默认右键菜单
@@ -297,6 +298,8 @@ onUnmounted(() => {
   padding: 3px 10px;
   border: 1px solid #209ffd;
   background: #209ffd1c;
+  color: var(--mars-text-color);
+
 }
 
 .mars3d-tooltip {
@@ -327,7 +330,7 @@ onUnmounted(() => {
   border-bottom: 1px solid var(--mars-hover-btn-bg);
   a {
     font-size: 16px;
-    color: var(--mars-msg-title-color);
+    color: var(--mars-text-color);
   }
 }
 .mars3d-template-content {

@@ -1,13 +1,13 @@
 import type { ComputedRef, Slots } from 'vue';
 import type { BasicTableProps, FetchParams } from '../types/table';
 import { unref, computed } from 'vue';
-import type { FormProps } from '/@/components/Form';
-import { isFunction } from '/@/utils/is';
+import type { FormProps } from '@/components/Form';
+import { isFunction } from '@/utils/is';
 
 export function useTableForm(
   propsRef: ComputedRef<BasicTableProps>,
   slots: Slots,
-  fetch: (opt?: FetchParams | undefined) => Promise<void>,
+  fetch: (opt?: FetchParams | undefined) => Promise<Recordable<any>[] | undefined>,
   getLoading: ComputedRef<boolean | undefined>,
 ) {
   const getFormProps = computed((): Partial<FormProps> => {
