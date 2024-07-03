@@ -69,7 +69,7 @@
   },
   "dependencies": {
     "mars3d": "~3.7.0",
-    "mars3d-cesium": "~1.118.0",
+    "mars3d-cesium": "~1.119.0",
     "@turf/turf": "^6.5.0",
     "kml-geojson": "^1.2.0",
     "vuex": "^4.0.2",
