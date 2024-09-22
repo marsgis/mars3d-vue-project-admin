@@ -70,7 +70,7 @@
   "dependencies": {
     "mars3d": "~3.8.0",
     "mars3d-cesium": "~1.121.0",
-    "@turf/turf": "^6.5.0",
+    "@turf/turf": "^7.1.0",
     "kml-geojson": "^1.2.0",
     "vuex": "^4.0.2",
     "vue-color-kit": "^1.0.5",
