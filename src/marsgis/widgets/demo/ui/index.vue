@@ -372,7 +372,7 @@ onMounted(() => {
   const url = `${process.env.BASE_URL}config/config.json`
   axios.get(url).then(function (res: any) {
     const data = res.data
-    const layers = data.map3d.layers
+    const layers = data.layers
     for (let i = layers.length - 1; i >= 0; i--) {
       const layer = mapWork.createLayer(layers[i]) //  创建图层
       if (layer && layer.pid === 20) {

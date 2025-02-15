@@ -35,11 +35,7 @@ const withKeyId = computed(() => `mars3d-container-${props.mapKey}`)
 onMounted(() => {
   // 获取配置
   mars3d.Util.fetchJson({ url: props.url }).then((data: any) => {
-    if (data.map3d) {
-      initMars3d(data.map3d)
-    } else {
-      initMars3d(data)
-    }
+    initMars3d(data)
   })
 })
 
