@@ -4,7 +4,7 @@
 <script setup lang="ts">
 /**
  * 地图渲染组件
- * @copyright 火星科技 mars3d.cn
+ * @copyright mars3d.cn
  * @author 火星渣渣灰 2022-02-19
  */
 import { computed, onUnmounted, onMounted, h, ref, toRaw } from "vue"
